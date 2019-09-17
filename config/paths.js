@@ -3,7 +3,14 @@
 const path = require('path');
 const fs = require('fs');
 const url = require('url');
-
+const pagePath = path.resolve(__dirname, '../src/pages')
+const glob = require('glob')
+const modulesDir = glob.sync(pagePath + '/*')
+const buildModule = process.argv[process.argv.length - 1]
+let pageList = []
+modulesDir.forEach((file) => {
+  pageList.push(file.split('/')[file.split('/').length - 1])
+})
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebook/create-react-app/issues/637
 const appDirectory = fs.realpathSync(process.cwd());
@@ -66,6 +73,17 @@ const resolveModule = (resolveFn, filePath) => {
 };
 
 // config after eject: we're in ./config/
+
+// cy add : 多页面入口
+// 引入 globby 模块
+const globby = require('globby');
+// 入口文件路径
+let entriesPath = {}
+pageList.forEach(item => {
+  entriesPath[item] = `./src/pages/${item}/index.js`
+});
+// cy add end : 多页面入口
+
 module.exports = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
@@ -83,6 +101,7 @@ module.exports = {
   appNodeModules: resolveApp('node_modules'),
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
+  entriesPath: entriesPath // cy add: 多页面入口
 };
 
 
