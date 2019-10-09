@@ -1,9 +1,18 @@
 
 
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const pagePath = path.resolve(__dirname, '../src/pages')
+const glob = require('glob')
+const modulesDir = glob.sync(pagePath + '/*')
+let pageList = []
+modulesDir.forEach((file) => {
+  pageList.push(file.split('/')[file.split('/').length - 1])
+})
 const fs = require('fs');
 const url = require('url');
-
+const isEnvProduction = process.env.NODE_ENV === 'production' ? true : false
+const isEnvDevelopment = process.env.NODE_ENV !== 'production' ? true : false
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebook/create-react-app/issues/637
 const appDirectory = fs.realpathSync(process.cwd());
@@ -64,7 +73,6 @@ const resolveModule = (resolveFn, filePath) => {
 
   return resolveFn(`${filePath}.js`);
 };
-
 // config after eject: we're in ./config/
 module.exports = {
   dotenv: resolveApp('.env'),
@@ -72,7 +80,48 @@ module.exports = {
   appBuild: resolveApp('build'),
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
+  // appHtml: () => {
+  //   let arr = []
+  //   pageList.forEach((pageDir) => {
+  //     arr.push(new HtmlWebpackPlugin(
+  //       Object.assign({}, {
+  //           inject: true,
+  //           template: '../public/index.html',
+  //           filename: `${pageList.length === 1 ? 'index' : pageDir}.html`,
+  //         },
+  //         isEnvProduction ? {
+  //           minify: {
+  //             removeComments: true,
+  //             collapseWhitespace: true,
+  //             removeRedundantAttributes: true,
+  //             useShortDoctype: true,
+  //             removeEmptyAttributes: true,
+  //             removeStyleLinkTypeAttributes: true,
+  //             keepClosingSlash: true,
+  //             minifyJS: true,
+  //             minifyCSS: true,
+  //             minifyURLs: true,
+  //           },
+  //         } :
+  //         undefined
+  //       )
+  //     ))
+  //   })
+  //   return arr
+  // },
   appIndexJs: resolveModule(resolveApp, 'src/pages/demo/index'),
+  // appIndexJs: () => {
+  //   let entries = {}
+  //   pageList.forEach((pageDir) => {
+  //     entries[pageDir] =
+  //       [
+  //         isEnvDevelopment &&
+  //           require.resolve('react-dev-utils/webpackHotDevClient'),
+  //         resolveModule(resolveApp, `src/pages/${pageDir}/index`),
+  //       ].filter(Boolean)
+  //   })
+  //   return entries
+  // },
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   appTsConfig: resolveApp('tsconfig.json'),

@@ -1,3 +1,5 @@
+import { object } from "prop-types";
+
 /**
  * @description 全局的功能函数
  */
@@ -44,7 +46,7 @@ const Tools = {
   uniqueArr (oldArr, id) {
     let allArr = []
     for (var i = 0; i < oldArr.length; i++) {
-      let tag = allArr.some(item => {
+      let tag = allArr.some(item: any => {
         return item[id] === oldArr[i][id]
       })
       if (!tag) {

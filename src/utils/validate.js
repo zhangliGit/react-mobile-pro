@@ -3,15 +3,12 @@
  * @author zhangli
  */
 
-import Vue from 'vue'
+import { Toast } from 'antd-mobile'
 const validateForm = (yzForm, form, callBack) => {
   for (let val in form) {
     if (yzForm.hasOwnProperty(val)) {
       if (form[val] === '' || JSON.stringify(form[val]) === '[]' || JSON.stringify(form[val]).indexOf('请选择') > -1) {
-        Vue.prototype.$toast({
-          duration: 1200,
-          message: yzForm[val]
-        })
+        Toast.info(yzForm[val], 1.2, null, true)
         return
       }
     }

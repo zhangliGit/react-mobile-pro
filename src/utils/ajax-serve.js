@@ -5,7 +5,7 @@
 
 import axios from 'axios'
 import qs from 'qs'
-import Vue from 'vue'
+import { Toast } from 'antd-mobile'
 
 // 请求超时时间
 axios.defaults.timeout = 15000
@@ -24,19 +24,19 @@ axios.interceptors.response.use(function (response) {
   return Promise.reject(error)
 })
 
-const showToast = (tip = '') => {
-  Vue.prototype.$toast.loading({ mask: false, message: tip, duration: 0 })
+const showToast = () => {
+  Toast.loading('努力加载中...', '', null, true)
 }
 
 // 处理响应结果
 function responseRes (res) {
-  Vue.prototype.$toast.clear()
+  Toast.hide()
   return new Promise((resolve, reject) => {
     if (res.code === 200 || res.status === true) {
       resolve(res)
     } else {
       reject(res)
-      Vue.prototype.$toast.fail(res.message || '请求失败')
+      Toast.fail(res.message || '请求失败', '2', null, true)
     }
   })
 }
