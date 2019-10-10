@@ -16,8 +16,8 @@ const App: React.FC = () => {
   }
   useEffect(() => {
     $ajax
-      .post({
-        url: "http://192.168.2.247:3000/mock/40/getIndex"
+      .get({
+        url: "/api/get"
       })
       .then((res: resD) => {
         setData(res.data);

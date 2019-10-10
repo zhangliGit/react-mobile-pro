@@ -147,6 +147,7 @@
   },
   "devDependencies": {
     "glob": "^7.1.4",
+    "http-proxy-middleware": "^0.20.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "postcss-pxtorem": "^4.0.1",
