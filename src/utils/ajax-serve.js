@@ -30,7 +30,9 @@ const showToast = () => {
 
 // 处理响应结果
 function responseRes (res) {
-  Toast.hide()
+  setTimeout(() => {
+    Toast.hide()
+  }, 1000)
   return new Promise((resolve, reject) => {
     if (res.code === 200 || res.status === true) {
       resolve(res)

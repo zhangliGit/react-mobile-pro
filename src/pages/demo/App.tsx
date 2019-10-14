@@ -2,43 +2,42 @@ import React, { useState, useEffect } from 'react';
 import $ajax from '../../utils/ajax-serve'
 import ScrollList from '../../components/common/ScrollList/index'
 import './App.less'
-import { Button, Switch } from 'antd-mobile'
-import ChildOne from './ChildOne'
 
-const App: React.FC = () => {
-  const params = {
-    title: 'haha'
-  }
-  const [checked, setCheck] = useState(true)
+const App: React.FC = (props: any) => {
   const [dataList, setData] = useState([]);
   interface resD {
-    data: []
+    data: [];
   }
   useEffect(() => {
     $ajax
       .get({
-        url: "/api/get"
+        url: "http://yapi.demo.qunar.com/mock/5691/app"
       })
       .then((res: resD) => {
         setData(res.data);
       });
-  }, [])
+  }, []);
+  const goList = () => {
+    props.history.push("/list");
+  };
   return (
     <div className="qui-page qui-fx-ver app">
       <div className="header">
-          <Button type="primary">确定</Button>
-        <Switch checked={checked} onChange = { () => setCheck(!checked)}></Switch>
+        首页
       </div>
       <ScrollList>
         <ul>
-          {dataList.map((item: { title: string }, index: number) => {
-            return <li style={{padding: '25px'}} key={index}>{item.title}</li>;
+          {dataList.map((item: { name: string }, index: number) => {
+            return (
+              <li onClick={() => goList()} className="qui-bd-b" style={{ padding: '20px 25px', background: '#fff' }} key={index}>
+                {item.name}
+              </li>
+            );
           })}
         </ul>
       </ScrollList>
-      <ChildOne {...params}></ChildOne>
     </div>
   );
-}
+};
 
 export default App;
