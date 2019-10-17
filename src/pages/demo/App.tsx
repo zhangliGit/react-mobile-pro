@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import $ajax from '../../utils/ajax-serve'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import ScrollList from '../../components/common/ScrollList/index'
 import './App.less'
 
@@ -20,6 +22,7 @@ const App: React.FC = (props: any) => {
   const goList = () => {
     props.history.push("/list");
   };
+  console.log(props)
   return (
     <div className="qui-page qui-fx-ver app">
       <div className="header">
@@ -40,4 +43,17 @@ const App: React.FC = (props: any) => {
   );
 };
 
-export default App;
+function mapStateToProps(state: any) {
+  return {
+    list: []
+  }
+}
+
+function mapDispatchToProps(dispatch: any) {
+  return {
+    actions: bindActionCreators({ ticketList }, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
+
