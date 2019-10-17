@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import { updataState } from './ticket'
+import { reducer  } from './home'
 const RootReducer = combineReducers({
-  updataState
+  reducer 
 })
 
 export default RootReducer;

@@ -1,22 +1,31 @@
 import $ajax from '@u/ajax-serve';
 
-export const TICKET_LIST = 'ticket_list';
-
-/**
- * @Func ticketList
- * @Des 查询火车票列表
- */
-const updateData = (data) => ({
+const updateData = (action) => ({
   type: 'updateData',
-  list: data
+  action
 });
-export const ticketList = () => {
+
+// 同步改变reducer
+export const commit = (action) => {
+  return (dispatch) => {
+    dispatch(updateData(action));
+  }
+}
+
+// 异步改变reducer
+export const fetch = () => {
   return async (dispatch) => {
     const params = {
-      url: ''
+      url: 'http://yapi.demo.qunar.com/mock/5691/app'
     }
-    let data = await $ajax.get(params);
-    dispatch(updateData(data.data));
+    const res = await $ajax.get(params);
+    return new Promise((resolve, reject) => {
+      if (res.code === 200 || res.code === true) {
+        resolve(res)
+      } else {
+        reject(res)
+      }
+    })
   }
 }
 
