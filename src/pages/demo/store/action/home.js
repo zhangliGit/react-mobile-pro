@@ -1,6 +1,5 @@
 import $ajax from '@u/ajax-serve';
 
-export const TICKET_LIST = 'ticket_list';
 
 /**
  * @Func ticketList
