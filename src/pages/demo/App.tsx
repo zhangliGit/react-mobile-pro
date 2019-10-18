@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import $ajax from '../../utils/ajax-serve'
+import { fetch, commit } from './store/action/home'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import ScrollList from '../../components/common/ScrollList/index'
@@ -22,11 +23,18 @@ const App: React.FC = (props: any) => {
   const goList = () => {
     props.history.push("/list");
   };
+  const  getData = async () => {
+    const res = await props.actions.fetch()
+    console.log(res, 0)
+  }
   console.log(props)
   return (
     <div className="qui-page qui-fx-ver app">
       <div className="header">
-        首页
+        首页{props.name}
+      </div>
+      <div onClick={() => getData()}>
+        获取数据
       </div>
       <ScrollList>
         <ul>
@@ -45,13 +53,14 @@ const App: React.FC = (props: any) => {
 
 function mapStateToProps(state: any) {
   return {
-    list: []
+    list: state.reducer.list,
+    name: state.reducer.name
   }
 }
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    actions: bindActionCreators({ ticketList }, dispatch)
+    actions: bindActionCreators({ fetch, commit }, dispatch)
   };
 }
 
