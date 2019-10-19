@@ -322,6 +322,7 @@ module.exports = function(webpackEnv) {
         .filter(ext => useTypeScript || !ext.includes('ts')),
       alias: {
         '@a': path.resolve(__dirname, '../src/assets'),
+        '@config': path.resolve(__dirname, '../src/config'),
         '@u': path.resolve(__dirname, '../src/utils'),
         '@c': path.resolve(__dirname, '../src/components/common'),
         '@cus': path.resolve(__dirname, '../src/components/custom'),

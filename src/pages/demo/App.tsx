@@ -1,40 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import actions from "./store/action/home";
 import $ajax from '../../utils/ajax-serve'
-import { fetch, commit } from './store/action/home'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import ScrollList from '../../components/common/ScrollList/index'
 import './App.less'
-
 const App: React.FC = (props: any) => {
   const [dataList, setData] = useState([]);
-  interface resD {
-    data: [];
-  }
   useEffect(() => {
-    $ajax
-      .get({
-        url: "http://yapi.demo.qunar.com/mock/5691/app"
-      })
-      .then((res: resD) => {
-        setData(res.data);
-      });
+    props.actions.getIndex().then((res: any) => {
+      setData(res.data)
+    })
   }, []);
   const goList = () => {
     props.history.push("/list");
   };
-  const  getData = async () => {
-    const res = await props.actions.fetch()
-    console.log(res, 0)
-  }
-  console.log(props)
   return (
     <div className="qui-page qui-fx-ver app">
       <div className="header">
         首页{props.name}
-      </div>
-      <div onClick={() => getData()}>
-        获取数据
       </div>
       <ScrollList>
         <ul>
@@ -59,8 +43,9 @@ function mapStateToProps(state: any) {
 }
 
 function mapDispatchToProps(dispatch: any) {
+  const { getIndex } = actions
   return {
-    actions: bindActionCreators({ fetch, commit }, dispatch)
+    actions: bindActionCreators({ getIndex }, dispatch)
   };
 }
 

@@ -1,33 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { useKeepAliveEffect } from 'react-keep-alive'
-import $ajax from "../../utils/ajax-serve";
+import actions from "./store/action/home";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import ScrollList from "../../components/common/ScrollList/index";
 
 const List: React.FC = (props: any) => {
   const [dataList, setList] = useState([]);
   useEffect(() => {
     // 路由缓存浏览器刷新当前界面时加载数据
-    if (props.history.action === 'POP') {
-      getList()
-    }
+    showList();
   }, []);
-  useKeepAliveEffect(() => {
-    // 对于缓存的路由，只有进入类型为push时才刷新加载
-    if (props.history.action === 'PUSH') {
-      getList()
-    }
-    // 缓存路由退入后台时触发
-    return () => {
-    };
-  })
-  const getList = () => {
-    $ajax
-    .get({
-      url: "http://yapi.demo.qunar.com/mock/5691/getList"
-    })
-    .then(res => {
-      setList(res.data);
-    });
+  // useKeepAliveEffect(() => {
+  //   // 对于缓存的路由，只有进入类型为push时才刷新加载
+  //   if (props.history.action === 'PUSH') {
+  //     getList()
+  //   }
+  //   // 缓存路由退入后台时触发
+  //   return () => {
+  //   };
+  // })
+  const showList = async () => {
+    const res = await props.actions.getList();
+    setList(res.data);
   }
   const goDetial = () => {
     props.history.push("/detail");
@@ -36,7 +31,7 @@ const List: React.FC = (props: any) => {
     <div className="qui-page qui-fx-ver app">
       <div className="header">列表</div>
       <ScrollList>
-        <ul style={{pointerEvents: 'auto'}}>
+        <ul>
           {dataList.map((item: { title: string }, index: number) => {
             return (
               <li
@@ -55,4 +50,14 @@ const List: React.FC = (props: any) => {
   );
 };
 
-export default List;
+function mapDispatchToProps(dispatch: any) {
+  const { getList } = actions;
+  return {
+    actions: bindActionCreators({ getList }, dispatch)
+  };
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(List);

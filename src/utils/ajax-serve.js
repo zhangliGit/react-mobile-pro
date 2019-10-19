@@ -7,6 +7,7 @@ import axios from 'axios'
 import qs from 'qs'
 import { Toast } from 'antd-mobile'
 
+
 // 请求超时时间
 axios.defaults.timeout = 15000
 
@@ -25,14 +26,12 @@ axios.interceptors.response.use(function (response) {
 })
 
 const showToast = () => {
-  Toast.loading('努力加载中...', '', null, true)
+  Toast.loading('努力加载中...', 0, null, true)
 }
 
 // 处理响应结果
 function responseRes (res) {
-  setTimeout(() => {
-    Toast.hide()
-  }, 1000)
+  Toast.hide()
   return new Promise((resolve, reject) => {
     if (res.code === 200 || res.status === true) {
       resolve(res)

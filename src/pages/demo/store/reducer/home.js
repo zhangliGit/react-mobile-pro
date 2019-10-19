@@ -1,17 +1,16 @@
 
 /**
- * @Func ticketList
- * @Des 火车票列表，详情数据处理
+ * @Func reducer
+ * @Des 全局数据存储
  */
 const intiState = {
-  name: 'zhangli',
-  list: '列表'
+  list: []
 };
 
 export const reducer = (state = intiState, action) => {
   const params = action.action
   switch(action.type) {
-    case 'updateData' :
+    case 'updateState' :
     return {
       ...state,
       [params.key]: params.data
