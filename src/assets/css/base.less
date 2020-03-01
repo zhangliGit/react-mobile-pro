@@ -2,7 +2,6 @@
  * @description qui基础样式
  * @author zhangli
  */
-
 * {
   margin: 0;
   padding: 0;
@@ -10,8 +9,9 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", STHeiti, "Microsoft Yahei", Tahoma, Simsun, sans-serif;
-  font-size: .7rem !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', STHeiti, 'Microsoft Yahei', Tahoma,
+    Simsun, sans-serif;
+  font-size: 0.7rem !important;
   overflow-x: hidden;
   color: #333;
   background-color: #f5f5f5;
@@ -31,7 +31,7 @@ div {
 input:focus,
 textarea:focus,
 select:focus {
-  outline-offset: -1PX;
+  outline-offset: -1px;
   outline: -webkit-focus-ring-color auto 5px;
 }
 
@@ -58,11 +58,11 @@ button {
  * 元素居中居右
  */
 .qui-tx-c {
-  text-align: center
+  text-align: center;
 }
 
 .qui-tx-r {
-  text-align: right
+  text-align: right;
 }
 
 /**
@@ -78,7 +78,7 @@ button {
   position: absolute;
   top: 0;
   left: 0;
-  border: 1PX solid #dddddd;
+  border: 1px solid #dddddd;
   width: 200%;
   height: 200%;
   -webkit-transform: scale(0.5);
@@ -92,7 +92,7 @@ button {
 }
 
 .qui-bd-t:before {
-  border-top: 1PX solid #dddddd;
+  border-top: 1px solid #dddddd;
   content: ' ';
   display: block;
   width: 100%;
@@ -109,7 +109,7 @@ button {
 }
 
 .qui-bd-b:after {
-  border-bottom: 1PX solid #dddddd;
+  border-bottom: 1px solid #dddddd;
   content: ' ';
   display: block;
   width: 100%;
@@ -126,7 +126,7 @@ button {
 }
 
 .qui-bd-l:after {
-  border-left: 1PX solid #dddddd;
+  border-left: 1px solid #dddddd;
   content: ' ';
   display: block;
   height: 100%;
@@ -143,7 +143,7 @@ button {
 }
 
 .qui-bd-r:after {
-  border-right: 1PX solid #dddddd;
+  border-right: 1px solid #dddddd;
   content: ' ';
   display: block;
   height: 100%;
@@ -156,11 +156,10 @@ button {
 }
 
 /* Retina 适配 */
-@media only screen and (-webkit-min-device-pixel-ratio: 2.0),
-only screen and (min--moz-device-pixel-ratio: 2.0),
-only screen and (-o-min-device-pixel-ratio: 200/100),
-only screen and (min-device-pixel-ratio: 2.0) {
-
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 200/100),
+  only screen and (min-device-pixel-ratio: 2) {
   .qui-bd-t:before,
   .qui-bd-b:after {
     -webkit-transform: scaleY(0.5);
@@ -174,33 +173,31 @@ only screen and (min-device-pixel-ratio: 2.0) {
   }
 }
 
-@media (-webkit-device-pixel-ratio:3) {
-
+@media (-webkit-device-pixel-ratio: 3) {
   .qui-bd-t:before,
   .qui-bd-b:after {
-    -webkit-transform: scaleY(.3333);
-    transform: scaleY(.3333);
+    -webkit-transform: scaleY(0.3333);
+    transform: scaleY(0.3333);
   }
 
   .qui-bd-l:after,
   .qui-bd-r:after {
-    -webkit-transform: scaleX(.3333);
-    transform: scaleX(.3333);
+    -webkit-transform: scaleX(0.3333);
+    transform: scaleX(0.3333);
   }
 }
 
-@media (-webkit-device-pixel-ratio:4) {
-
+@media (-webkit-device-pixel-ratio: 4) {
   .qui-bd-t:before,
   .qui-bd-b:after {
-    -webkit-transform: scaleY(.25);
-    transform: scaleY(.25);
+    -webkit-transform: scaleY(0.25);
+    transform: scaleY(0.25);
   }
 
   .qui-bd-l:after,
   .qui-bd-r:after {
-    -webkit-transform: scaleX(.25);
-    transform: scaleX(.25);
+    -webkit-transform: scaleX(0.25);
+    transform: scaleX(0.25);
   }
 }
 
@@ -208,15 +205,15 @@ only screen and (min-device-pixel-ratio: 2.0) {
  * 字体
  */
 .qui-fs-01 {
-  font-size: .65rem;
+  font-size: 0.65rem;
 }
 
 .qui-fs-02 {
-  font-size: .6rem;
+  font-size: 0.6rem;
 }
 
 .qui-fs-1 {
-  font-size: .85rem;
+  font-size: 0.85rem;
 }
 
 .qui-fs-2 {
@@ -224,7 +221,7 @@ only screen and (min-device-pixel-ratio: 2.0) {
 }
 
 .qui-fs-3 {
-  font-size: 1.2rem
+  font-size: 1.2rem;
 }
 
 /**
