@@ -9,12 +9,7 @@ export default class App extends Component {
       appList: [
         {
           id: 1,
-          name: '类组件',
-          url: 'demo'
-        },
-        {
-          id: 2,
-          name: '函数组件',
+          name: '示例',
           url: 'demo'
         }
       ]

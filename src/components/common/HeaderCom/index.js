@@ -4,7 +4,6 @@ import './index.less'
 
 export default class HeaderCom extends Component {
   goBack = () => {
-    console.log(this)
     this.props.history.goBack()
   }
   render() {
